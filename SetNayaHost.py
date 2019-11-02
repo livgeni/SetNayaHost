@@ -4,10 +4,15 @@ Update the naya (CDP) host IP address
 
 from EditWinHostsFile import upsert
 
-IP_ADDR = input('Ip Address for instance-1.us-central1-c.c.naya-de.internal: ')
+default_hostname = 'naya-cnt7-cdh6-v2.us-central1-a.c.naya-de.internal'
+
+hostname = input(f'Naya server full name (default:{default_hostname}):')
+if len(hostname) < 1:
+	hostname = 'naya-cnt7-cdh6-v2.us-central1-a.c.naya-de.internal'
+ip_addr = input(f'Ip Address for {hostname}: ')
 
 try:
-    upsert('instance-1.us-central1-c.c.naya-de.internal', IP_ADDR, is_print_new_file=True)
+    upsert(hostname, ip_addr, is_print_new_file=True)
 except Exception as ex:
     print(f'Exception occured: {ex}')
     print(r'Try runnig as administrator')
